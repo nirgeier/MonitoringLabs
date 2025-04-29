@@ -1,0 +1,59 @@
+# Docker Compose file for Prometheus, Grafana, Loki, and Grafana Alloy (agent)
+#
+# This stack provides:
+#   - Prometheus: Metrics collection and alerting
+#   - Grafana: Visualization and dashboards
+#   - Loki: Log aggregation
+#   - Grafana Alloy: Unified agent for metrics and logs
+
+services:
+  # Prometheus for metrics scraping and alerting
+  prometheus:
+    image: prom/prometheus:v2.45.3
+    restart: unless-stopped
+    volumes:
+      - ./prometheus:/etc/prometheus
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090" # Prometheus web UI
+
+  # Grafana for dashboards and visualization
+  grafana:
+    image: grafana/grafana:10.4.0
+    restart: unless-stopped
+    ports:
+      - "3000:3000" # Grafana web UI
+    environment:
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_BASIC_ENABLED=false
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning
+
+  # Loki for log aggregation
+  loki:
+    image: grafana/loki:2.9.4
+    restart: unless-stopped
+    ports:
+      - "3100:3100" # Loki API
+    command: -config.file=/etc/loki/local-config.yaml
+    volumes:
+      - ./loki:/etc/loki
+
+  # Grafana Alloy (agent) for metrics and logs collection
+  alloy:
+    image: grafana/alloy:latest
+    restart: unless-stopped
+    command: --config.file=/etc/alloy/config.alloy.yaml
+    volumes:
+      - ./alloy:/etc/alloy
+    ports:
+      - "12345:12345" # Example port for Alloy metrics endpoint
+
+# Add persistent storage volumes if needed
+# volumes:
+#   prometheus_data:
+#   loki_data:
+#   grafana_data:
+#   alloy_data:
