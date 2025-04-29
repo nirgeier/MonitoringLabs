@@ -1,0 +1,41 @@
+// Alloy configuration for collecting logs and exporting to Loki and OpenTelemetry Collector
+local.file_matcher "varlogs" {
+  path_targets = ["/var/log/*.log"]
+}
+
+discovery.kubernetes "local" {
+  role = "node"
+}
+
+otelcol.receiver.otlp "default" {
+  protocols = {
+    grpc = {}
+    http = {}
+  }
+}
+
+otelcol.exporter.otlp "collector" {
+  endpoint = "otel-collector:4317"
+  tls = {
+    insecure = true
+  }
+}
+
+loki.write "default" {
+  endpoint = "http://loki:3100/loki/api/v1/push"
+}
+
+prometheus.scrape "prometheus" {
+  targets = [{
+      __address__ = "prometheus:9090"
+    }]
+  metrics_path = "/metrics"
+}
+
+otelcol.processor.batch "default" {}
+
+otelcol.service "default" {
+  receivers    = [otelcol.receiver.otlp.default]
+  exporters    = [otelcol.exporter.otlp.collector]
+  processors   = [otelcol.processor.batch.default]
+}
