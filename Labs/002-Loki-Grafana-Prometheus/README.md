@@ -74,6 +74,8 @@ curl -X GET http://localhost:8090/metrics
 - Open Grafana and login with the default credentials (none for this demo).
 - Explore the pre-configured dashboards for Loki and Prometheus.
 
+   ![Grafana Dashboard](/resources/images/grafana-dashboards.png)
+
 ---
 
 This setup provides a hands-on environment to explore log aggregation, metrics collection, and visualization using popular open-source tools.

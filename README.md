@@ -1,7 +1,12 @@
 # Monitoring Labs
 
-[![Open in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.svg)](https://console.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/nirgeier/KubernetesLabs)
+<div align="center">
+<img src="/resources/images/monitoring-labs.png" alt="Monitoring Labs" width="400" style="border-radius: 25px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+</div>
 
+[![Open in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.svg)](https://console.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/nirgeier/MonitoringLabs)
+
+---
 
 - This lab will contain various tools and techniques for monitoring Kubernetes clusters.
 - The tools will be installed in a Kubernetes cluster using Helm charts.
