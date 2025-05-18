@@ -1,4 +1,4 @@
-# Loki, Grafana, and Lab
+# Loki, Grafana, Prometheus Lab
 
 This lab demonstrates a complete monitoring and logging stack using Docker Compose. The stack includes:
 
@@ -41,14 +41,19 @@ This lab demonstrates a complete monitoring and logging stack using Docker Compo
 - Configuration files for Loki, Prometheus, and Grafana provisioning are mounted from the `../../resources/configs/` directory.
 - All services are connected via the `loki` Docker network.
 
-## Stopping the Stack
-```sh
-docker-compose down
-```
 
 ---
 
 ## Demo flow
+
+- Execute the `demo.sh` script to start the demo.
+- The script will:
+  - Start the Docker containers.
+  - Wait for the services to be up and running.
+  - Send requests to the demo server.
+- Open Grafana in the default web browser.
+  - Explore the pre-configured dashboards for Loki and Prometheus.
+  
 
 ### Server
 
@@ -66,7 +71,7 @@ curl -X GET http://localhost:8090/metrics
 
 ### Grafana
 
-- Open Grafana and login with the default credentials.
+- Open Grafana and login with the default credentials (none for this demo).
 - Explore the pre-configured dashboards for Loki and Prometheus.
 
 ---

@@ -16,4 +16,11 @@ docker-compose --env-file $ROOT_FOLDER/resources/compose/.env down --remove-orph
 # Spin up the containers
 docker-compose --env-file $ROOT_FOLDER/resources/compose/.env up -d --build --remove-orphans 
 
-
+### Set some demo data for the demo
+for i in {1..10}; do
+  # Add ping counter 
+  curl -s -o /dev/null http://localhost:8090/ping
+  # Add error counter
+  curl -s -o /dev/null http://localhost:8090/error
+  sleep 1
+done

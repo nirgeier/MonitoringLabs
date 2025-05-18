@@ -40,8 +40,17 @@ services:
     depends_on:
       - server
 
+  portainer:
+    extends:
+      file: ${ROOT_FOLDER}/resources/compose/portainer.yaml
+      service: portainer
+    networks:
+      - compose-lab-network
+    
 networks:
   compose-lab-network:
     name: compose-lab-network
     driver: bridge
 
+volumes:
+  portainer_data:
