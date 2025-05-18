@@ -1,0 +1,7 @@
+services:
+  server:
+    build:
+      dockerfile: Dockerfile
+      context: ../../resources/server
+    ports:
+      - "${SERVER_PORT}:8090"

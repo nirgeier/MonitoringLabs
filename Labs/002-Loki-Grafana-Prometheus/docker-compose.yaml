@@ -1,0 +1,47 @@
+services:
+  server:
+    extends:
+      file: ${ROOT_FOLDER}/resources/compose/server.yaml
+      service: server
+    networks:
+      - compose-lab-network
+      
+  grafana:
+    extends:
+      file: ${ROOT_FOLDER}/resources/compose/grafana.yaml
+      service: grafana
+    networks:
+      - compose-lab-network
+    depends_on:
+      - loki
+      - prometheus
+      - server
+
+  prometheus:
+    extends:
+      file: ${ROOT_FOLDER}/resources/compose/prometheus.yaml
+      service: prometheus
+    networks:
+      - compose-lab-network
+      
+  loki:
+    extends:
+      file: ${ROOT_FOLDER}/resources/compose/loki.yaml
+      service: loki
+    networks:
+      - compose-lab-network
+    
+  node-exporter:
+    extends:
+      file: ${ROOT_FOLDER}/resources/compose/node-exporter.yaml
+      service: node-exporter
+    networks:
+      - compose-lab-network
+    depends_on:
+      - server
+
+networks:
+  compose-lab-network:
+    name: compose-lab-network
+    driver: bridge
+

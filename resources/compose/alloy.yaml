@@ -1,0 +1,10 @@
+# Grafana Alloy (agent) for metrics and logs collection
+services:
+  alloy:
+    image: grafana/alloy:latest
+    restart: unless-stopped
+    command: --config.file=/etc/alloy/config-alloy.alloy
+    volumes:
+      - ${ALLOY_CONFIG_PATH}:/etc/alloy
+    ports:
+      - ${ALLOY_PORT}:12345"

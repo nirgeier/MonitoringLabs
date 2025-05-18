@@ -283,7 +283,6 @@
   ],
   "refresh": "auto",
   "schemaVersion": 39,
-  "tags": [],
   "templating": {
     "list": []
   },
@@ -297,8 +296,8 @@
   "uid": "ping-dashboard",
   "version": 1,
   "weekStart": "",
-  "tags": {
+  "tags": [
     "Prometheus",
     "Metrics"
-  }
+  ]
 }

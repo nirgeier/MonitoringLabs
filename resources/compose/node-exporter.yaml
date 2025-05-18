@@ -1,0 +1,15 @@
+services:
+  node-exporter:
+    image: prom/node-exporter:v1.7.0
+    restart: unless-stopped
+    volumes:
+      - ${NODE_EXPORTER_PROC}:/host/proc:ro
+      - ${NODE_EXPORTER_SYS}:/host/sys:ro
+      - ${NODE_EXPORTER_ROOTFS}:/rootfs:ro
+    command:
+      - "--path.procfs=/host/proc"
+      - "--path.rootfs=/rootfs"
+      - "--path.sysfs=/host/sys"
+      - "--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)"
+    ports:
+      - "${NODE_EXPORTER_PORT}:9100"
